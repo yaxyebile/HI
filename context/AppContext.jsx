@@ -51,8 +51,10 @@ export const AppContextProvider = ({children})=>{
                     // sort chats by updated date
                     data.data.sort((a, b)=> new Date(b.updatedAt) - new Date(a.updatedAt));
 
-                     // set recently updated chat as selected chat
-                     setSelectedChat(data.data[0]);
+                     // Only set selectedChat if it's null or different from current
+                     if (!selectedChat || selectedChat._id !== data.data[0]._id) {
+                         setSelectedChat(data.data[0]);
+                     }
                      console.log(data.data[0]);
                  }
             }else{
